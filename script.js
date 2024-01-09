@@ -1,6 +1,7 @@
 var timer=60;
 var score=0;
 var hitrn=0;
+var timerinterval
 function increaseScore(){
     score +=10;
     document.querySelector("#scoreVal").textContent=score;
@@ -21,7 +22,7 @@ document.querySelector("#pbtm").innerHTML = clutter;
 }
 function runTimer()
 {
-    var timerinterval = setInterval(function (){
+    timerinterval = setInterval(function (){
     if(timer>0){
         timer--;
         document.querySelector("#Timer").textContent=timer;
@@ -45,6 +46,21 @@ document.querySelector("#pbtm")
 
 });
 
-getNewHit();
-runTimer();
+document.querySelector(".Restart").addEventListener("click", function () {
+    makeBubble();
+    clearInterval(timerinterval);
+    
+    score = 0;
+    document.querySelector("#scoreVal").textContent = score;
+    timer = 60;
+    runTimer();
+    getNewHit();
+});
+
+document.querySelector(".Start").addEventListener("click",function(){
+        clearInterval(timerinterval);
+        runTimer();
+        getNewHit();
+})
+
 makeBubble();
